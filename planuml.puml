@@ -1,0 +1,42 @@
+@startuml
+class Forum {
+-forumTitle : String
+-listOfTopics : List<Topic>
+
++addTopic(Topic): void
+
+}
+abstract class Entry {
+- id : UUID
+-creationDate : LocalDate
+-message : String
+
+}
+
+
+class Topic {
+-topicTitle : String
+-commentList : List<Comment>
+-typeOfTopic : TypeOfTopics
++addComment(Comment) : void
++getAllModeratedComments () : List<Comment>
+}
+class Comment {
+-isModerated : boolean
++ toggleCommentState() : void
+
+
+}
+
+enum TypeOfTopic {
+REGULAR,
+ANNOUNCEMENT,
+NEWS
+}
+
+Forum o-- Topic
+Topic o-- Comment
+Topic -- TypeOfTopics
+Entry <|-- Comment
+Entry <|-- Topic
+@enduml
